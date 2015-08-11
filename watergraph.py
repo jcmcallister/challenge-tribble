@@ -19,3 +19,54 @@
 
 
 """
+
+x_interval = 1
+y_interval = 1
+fx = (3,4,5,7,7,3,2,3,4,6,5,1,0,5)
+peaks = []
+lastpeaklocation = 0
+currMax = -999
+i=0
+
+while i < len(fx):
+	print "fx[%d]\t: %d" % (i, fx[i])
+
+	if currMax < fx[i]:
+		currMax = fx[i];
+
+	# get a peak list
+	if lastpeaklocation == 0:
+		# leftpeaks.append(fx[i]);
+		leftpeak = fx[i]
+
+	# if we can peek at next
+	if i < (len(fx) - 1):
+
+		# if next is growing
+		if fx[i+1] > fx[i]:
+			print "\tGROW from %d to %d!" % (fx[i], fx[i+1])
+			lastpeaklocation = i+1;
+		
+			# we reset the peak to the next one, which is higher
+			leftpeak = fx[i+1]
+
+			# were we in a valley just now? if so, add locations to the valley list
+
+
+
+		elif fx[i+1] < fx[i]:
+
+			# next is shrinking!
+
+			print "\tSHRINK from %d to %d!" % (fx[i], fx[i+1])
+
+			# was there a leftpeak to match this peak? if so, calc the water depth
+
+			lastpeaklocation = i;
+
+		peaks.append(lastpeaklocation)
+
+	i += 1;
+
+print "the max of the values is %d" % currMax
+print peaks
