@@ -70,15 +70,17 @@ int main(){
 
 				//loop from 1 to floor(sqrt), looking for possible combinations that work with differences
 				int diff;
+				char combos[2*flr];
 				for(int j=flr; j>=flr/2;j--){
 					diff = *i - (j*j);
 					if(sqrt(diff) - floor(sqrt(diff)) == 0){
 						printf("\tFOUND ??? %d^2 + %d^2 == %d\n",j, (int)(floorf(sqrt(diff))), *i);
-						if(false){
+						if(NULL){
 							//TODO: if number not found in a list of all DS combination terms
 							//	e.g. in 25, you can have 0, 5, 3, 4 to represent 0^2 + 5^2, 3^2 + 4^2, ...
 							//traversing lists/arrays in C... hrmmm...
 							//if it's ok, increment the counter!!!
+							combos[j] = "";
 							numDS++;
 						}
 						
