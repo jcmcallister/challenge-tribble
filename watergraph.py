@@ -24,12 +24,12 @@ x_interval = 1
 y_interval = 1
 # fx = (3,4,5,7,7,3,2,3,4,6,5,1,0,5)
 # fx = (5,1,5) # WORKS! 1 valley, should yield 4
-# fx = (5,1,5,3,0,3) # WORKS! multi peaks should yield 9
+# fx = (5,1,5,3,0,3) # WORKS! multi peaks should yield 7
 # fx = (1,1,4,1,0) # WORKS! just one peak, vol == 0
 # fx = (1,1) # WORKS! vol == 0
-#fx = (1,2,3,0,3,1,0) # WORKS! mountain with a crater on top, vol == 3
-# fx = (1,2,3,0,3,1,0,5) # max at END, 2 valleys, vol should be 8
-fx = (3,1,2) # 1 valley, max at position 0, vol == 1
+# fx = (1,2,3,0,3,1,0) # WORKS! mountain with a crater on top, vol == 3
+fx = (1,2,3,0,3,1,0,5) # max at END, 2 valleys, vol should be 8
+# fx = (4,1,6) # WORKS! 1 valley, max at position 0, vol == 3
 # fx = (2,1,3) # WORKS! 1 valley, max at end, vol == 1
 
 peaks = []
@@ -51,17 +51,20 @@ while i < len(fx):
 
 		# if next is growing
 		if fx[i+1] >= fx[i]:
-			# print "\tGROW from %d to %d!" % (fx[i], fx[i+1])
-			print 'g'
+			print "\tGROW from %d to %d!" % (fx[i], fx[i+1])
+			# print 'g'
 
 			# if we're growing out of a slump!
 			if currMax >= 0:
-				waterVolume += currMax - (y_interval * fx[i])
+				waterVolume += min(currMax,fx[i+1]) - (y_interval * fx[i])
+				print '\tadding %d water!' % (min(currMax,fx[i+1]) - (y_interval * fx[i]) )
 
 		elif fx[i+1] < fx[i]:
 
 			# next is sinking!
 
+			# we need an addition here in one special case
+			
 			# print "\tSINK from %d to %d!" % (fx[i], fx[i+1])
 			peaks.append(i)
 	else:
